@@ -1,28 +1,30 @@
 package org.selenium;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.selenium.pom.base.BaseTest;
+import org.selenium.pom.pages.HomePage;
+import org.selenium.pom.pages.StorePage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-/**
- * This is a bad practice example
- *
- */
-public class MyFirstTestcase {
+public class MyFirstTestcase extends BaseTest {
     @Test
     public void guestCheckOutUsingDirectBankTransfer() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
         driver.get("https://askomdch.com");
-        driver.manage().window().maximize();
-        driver.findElement(By.cssSelector("#menu-item-1227 > a")).click();
-        driver.findElement(By.id("woocommerce-product-search-field-0")).sendKeys("blue");
-        driver.findElement(By.cssSelector("button[value='Search']")).click();
-        Assert.assertEquals(
-                driver.findElement(By.cssSelector(".woocommerce-products-header__title.page-title")).getText(),
-                "Search results: “blue”"
-        );
+        HomePage homePage = new HomePage(driver);
+        StorePage storePage = homePage.clickStoreMenuLink();
+        storePage.
+                enterTextInSearchField("Blue").
+                clickSearchBtn();
+        Assert.assertEquals(storePage.getTitle(), "Search results: “blue”" );
+        storePage.clickAddToCartBtn();
+        //driver.findElement(By.cssSelector("#menu-item-1227 > a")).click();
+//        driver.findElement(By.id("woocommerce-product-search-field-0")).sendKeys("blue");
+//        driver.findElement(By.cssSelector("button[value='Search']")).click();
+//        Assert.assertEquals(
+//                driver.findElement(By.cssSelector(".woocommerce-products-header__title.page-title")).getText(),
+//                "Search results: “blue”"
+//        );
         driver.findElement(By.cssSelector("a[aria-label='Add “Blue Shoes” to your cart']")).click();
         Thread.sleep(5000);
         driver.findElement(By.cssSelector("a[title='View cart']")).click();
@@ -43,13 +45,10 @@ public class MyFirstTestcase {
                 driver.findElement(By.cssSelector(".woocommerce-notice")).getText(),
                 "Thank you. Your order has been received."
         );
-        driver.quit();
     }
         @Test
         public void loginAndCheckOutUsingDirectBankTransfer() throws InterruptedException {
-            WebDriver driver = new ChromeDriver();
             driver.get("https://askomdch.com");
-            driver.manage().window().maximize();
             driver.findElement(By.cssSelector("#menu-item-1227 > a")).click();
             driver.findElement(By.id("woocommerce-product-search-field-0")).sendKeys("blue");
             driver.findElement(By.cssSelector("button[value='Search']")).click();
@@ -83,8 +82,5 @@ public class MyFirstTestcase {
                     driver.findElement(By.cssSelector(".woocommerce-notice")).getText(),
                     "Thank you. Your order has been received."
             );
-
-            driver.quit();
-
         }
 }
