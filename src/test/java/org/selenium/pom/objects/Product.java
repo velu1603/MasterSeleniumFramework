@@ -1,9 +1,26 @@
 package org.selenium.pom.objects;
 
+import org.selenium.pom.utils.JacksonUtils;
+
+import java.io.IOException;
+
 public class Product {
     private int id;
     private String name;
 
+    public Product(){
+
+    }
+
+    public Product(int id) throws IOException {
+        Product[] products = JacksonUtils.deserializeJson("products.json", Product[].class);
+        for(Product product : products){
+            if(product.getId() == id){
+                this.id = id;
+                this.name = product.getName();
+            }
+        }
+    }
     public int getId() {
         return id;
     }
