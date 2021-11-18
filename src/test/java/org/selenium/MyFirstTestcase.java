@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class MyFirstTestcase extends BaseTest {
     @Test
-    public void guestCheckOutUsingDirectBankTransfer() throws InterruptedException, IOException {
+    public void guestCheckOutUsingDirectBankTransfer() throws IOException {
         String searchFor = "Blue";
         BillingAddress billingAddress = JacksonUtils.deserializeJson("myBillingAddress.json",BillingAddress.class );
         Product product = new Product(1215);
@@ -26,7 +26,6 @@ public class MyFirstTestcase extends BaseTest {
                             search(searchFor);
         Assert.assertEquals(storePage.getTitle(), "Search results: “"+searchFor+"”" );
         storePage.clickAddToCartBtn(product.getName());
-        Thread.sleep(5000);
         CartPage cartPage = storePage.clickViewCart();
         Assert.assertEquals(
                 cartPage.getProductName(),product.getName()
@@ -35,7 +34,6 @@ public class MyFirstTestcase extends BaseTest {
                 checkOut().
                 setBillingAddress(billingAddress).
                 placeOrder();
-        Thread.sleep(5000);
         Assert.assertEquals(
                 checkOutPage.getNotice(),
                 "Thank you. Your order has been received."
@@ -53,28 +51,16 @@ public class MyFirstTestcase extends BaseTest {
                     search(searchFor);
             Assert.assertEquals(storePage.getTitle(), "Search results: “"+searchFor+"”" );
             storePage.clickAddToCartBtn(product.getName());
-            Thread.sleep(5000);
             CartPage cartPage = storePage.clickViewCart();
             Assert.assertEquals(
                     cartPage.getProductName(),product.getName()
             );
-
             CheckOutPage checkOutPage = cartPage.checkOut();
             checkOutPage.clickHereToLoginLink();
-
-            Thread.sleep(3000);
             checkOutPage.
                     login(user).
                     setBillingAddress(billingAddress).
-//                    enterFirstName("demo").
-//                    enterLastName("user").
-//                    enterAddressLineOne("San Francisco").
-//                    enterCity("San Francisco").
-//                    enterPostCode("94188").
-//                    enterEmail("test1@gmail.com").
                     placeOrder();
-            //driver.findElement(By.cssSelector("a[title='View cart']")).click();
-            Thread.sleep(5000);
             Assert.assertEquals(
                     checkOutPage.getNotice(),
                     "Thank you. Your order has been received."
