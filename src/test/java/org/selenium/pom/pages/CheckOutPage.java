@@ -35,38 +35,44 @@ public class CheckOutPage extends BasePage {
     }
 
     public CheckOutPage enterFirstName(String firstName){
-        driver.findElement(firstnameFld).clear();
-        driver.findElement(firstnameFld).sendKeys(firstName);
+        WebElement e = wait.until(ExpectedConditions.visibilityOfElementLocated(firstnameFld));
+        e.clear();
+        e.sendKeys(firstName);
         return this;
     }
 
     public CheckOutPage enterLastName(String lastName){
-        driver.findElement(lastnameFld).clear();
-        driver.findElement(lastnameFld).sendKeys(lastName);
+        WebElement e = wait.until(ExpectedConditions.visibilityOfElementLocated(lastnameFld));
+        e.clear();
+        e.sendKeys(lastName);
         return this;
     }
 
     public CheckOutPage enterAddressLineOne(String addressLineOne){
-        driver.findElement(addressLineOneFld).clear();
-        driver.findElement(addressLineOneFld).sendKeys(addressLineOne);
+        WebElement e = wait.until(ExpectedConditions.visibilityOfElementLocated(addressLineOneFld));
+        e.clear();
+        e.sendKeys(addressLineOne);
         return this;
     }
 
     public CheckOutPage enterCity(String city){
-        driver.findElement(billingCityFld).clear();
-        driver.findElement(billingCityFld).sendKeys(city);
+        WebElement e = wait.until(ExpectedConditions.visibilityOfElementLocated(billingCityFld));
+        e.clear();
+        e.sendKeys(city);
         return this;
     }
 
     public CheckOutPage enterPostCode(String postCode){
-        driver.findElement(billingPostCodeFld).clear();
-        driver.findElement(billingPostCodeFld).sendKeys(postCode);
+        WebElement e = wait.until(ExpectedConditions.visibilityOfElementLocated(billingPostCodeFld));
+        e.clear();
+        e.sendKeys(postCode);
         return this;
     }
 
     public CheckOutPage enterEmail(String email){
-        driver.findElement(billingEmailFld).clear();
-        driver.findElement(billingEmailFld).sendKeys(email);
+        WebElement e = wait.until(ExpectedConditions.visibilityOfElementLocated(billingEmailFld));
+        e.clear();
+        e.sendKeys(email);
         return this;
     }
 
@@ -81,28 +87,24 @@ public class CheckOutPage extends BasePage {
     }
 
     public CheckOutPage placeOrder(){
-        List<WebElement> overlays = driver.findElements(overlay);
-        System.out.println("Overlay Size "+ overlays.size());
-        if(overlays.size() > 0){
-            new WebDriverWait(driver, Duration.ofSeconds(15)).
-                    until(ExpectedConditions.invisibilityOfAllElements(overlays));
-            System.out.println("Overlays are invisible ");
-        }
+        waifForOverlaysToDisappear(overlay);
         driver.findElement(placeOrderBtn).click();
         return this;
     }
 
     public String getNotice(){
-        return driver.findElement(successNotice).getText();
+        WebElement e = wait.until(ExpectedConditions.visibilityOfElementLocated(successNotice));
+        return e.getText();
     }
 
     public CheckOutPage clickHereToLoginLink(){
-        driver.findElement(clickHereToLogin).click();
+        wait.until(ExpectedConditions.elementToBeClickable(clickHereToLogin)).click();
         return this;
     }
 
     public CheckOutPage enterUserName(String username){
-        driver.findElement(usernameFld).sendKeys(username);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(usernameFld)).sendKeys(username);
+        //driver.findElement(usernameFld).sendKeys(username);
         return this;
     }
 
