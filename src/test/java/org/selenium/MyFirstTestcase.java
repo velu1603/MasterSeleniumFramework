@@ -40,7 +40,7 @@ public class MyFirstTestcase extends BaseTest {
         );
     }
         @Test
-        public void loginAndCheckOutUsingDirectBankTransfer() throws InterruptedException, IOException {
+        public void loginAndCheckOutUsingDirectBankTransfer() throws IOException {
             String searchFor = "blue";
             BillingAddress billingAddress = JacksonUtils.deserializeJson("myBillingAddress.json",BillingAddress.class );
             Product product = new Product(1215);
