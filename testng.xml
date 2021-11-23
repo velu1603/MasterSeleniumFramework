@@ -1,13 +1,28 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite1" verbose="1" >
-    <test name="Regression1"   >
+    <test name="Chrome"  verbose="1"  >
 <!--        <packages>-->
 <!--            <package name="org.selenium.pom.tests" />-->
 <!--        </packages>-->
         <parameter name="browser" value="CHROME"></parameter>
         <classes>
-            <class name="org.selenium.pom.tests.MyFirstTest"/>
+            <class name="org.selenium.pom.tests.MyFirstTest">
+                <methods>
+                    <exclude name="testForExperiment"></exclude>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Firefox"  verbose="1"  >
+        <parameter name="browser" value="FIREFOX"></parameter>
+        <classes>
+            <class name="org.selenium.pom.tests.MyFirstTest">
+                <methods>
+                    <include name="testForExperiment"/>
+                </methods>
+            </class>
+
         </classes>
 
     </test>

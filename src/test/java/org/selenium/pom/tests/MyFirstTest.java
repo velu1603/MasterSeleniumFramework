@@ -68,4 +68,9 @@ public class MyFirstTest extends BaseTest {
                     "Thank you. Your order has been received."
             );
         }
+        @Test
+        public void testForExperiment(){
+            System.out.println("Just a dummy test case");
+            Assert.assertEquals(1,1);
+        }
 }
