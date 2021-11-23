@@ -35,7 +35,7 @@ public class CheckOutPage extends BasePage {
     }
 
     public CheckOutPage selectCountry(String countryName){
-        Select select = new Select(driver.findElement(countryDropDown));
+        Select select = new Select(wait.until(ExpectedConditions.elementToBeClickable(countryDropDown)));
         select.selectByVisibleText(countryName);
         return this;
     }

@@ -1,4 +1,4 @@
-package org.selenium;
+package org.selenium.pom.tests;
 
 import org.selenium.pom.base.BaseTest;
 import org.selenium.pom.objects.BillingAddress;
@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 
-public class MyFirstTestcase extends BaseTest {
+public class MyFirstTest extends BaseTest {
     @Test
     public void guestCheckOutUsingDirectBankTransfer() throws IOException {
         String searchFor = "Blue";
