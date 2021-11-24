@@ -15,47 +15,47 @@ import java.io.IOException;
 
 
 public class MyFirstTest extends BaseTest {
-    @Test
+   @Test
+    //@Test
     public void guestCheckOutUsingDirectBankTransfer() throws IOException {
         String searchFor = "Blue";
         BillingAddress billingAddress = JacksonUtils.deserializeJson("myBillingAddress.json",BillingAddress.class );
         Product product = new Product(1215);
-        StorePage storePage = new HomePage(driver).
+        StorePage storePage = new HomePage(getDriver()).
                             load().
                             navigateToStoreUsingMenu().
                             search(searchFor);
         Assert.assertEquals(storePage.getTitle(), "Search results: “"+searchFor+"”" );
+        //org.junit.Assert.assertEquals("Search results: “"+searchFor+"”",storePage.getTitle());
         storePage.clickAddToCartBtn(product.getName());
         CartPage cartPage = storePage.clickViewCart();
-        Assert.assertEquals(
-                cartPage.getProductName(),product.getName()
-        );
+        Assert.assertEquals(cartPage.getProductName(),product.getName());
+        //org.junit.Assert.assertEquals(product.getName(), cartPage.getProductName());
         CheckOutPage checkOutPage = cartPage.
                 checkOut().
                 setBillingAddress(billingAddress).
                 selectDirectBankTransfer().
                 placeOrder();
-        Assert.assertEquals(
-                checkOutPage.getNotice(),
-                "Thank you. Your order has been received."
-        );
+       Assert.assertEquals(checkOutPage.getNotice(),"Thank you. Your order has been received.");
+        //org.junit.Assert.assertEquals("Thank you. Your order has been received.", checkOutPage.getNotice());
     }
-        @Test
+       @Test
+        //@Test
         public void loginAndCheckOutUsingDirectBankTransfer() throws IOException {
             String searchFor = "blue";
             BillingAddress billingAddress = JacksonUtils.deserializeJson("myBillingAddress.json",BillingAddress.class );
             Product product = new Product(1215);
             User user = new User("demouser19", "demopwd");
-            StorePage storePage = new HomePage(driver).
+            StorePage storePage = new HomePage(getDriver()).
                     load().
                     navigateToStoreUsingMenu().
                     search(searchFor);
-            Assert.assertEquals(storePage.getTitle(), "Search results: “"+searchFor+"”" );
+           Assert.assertEquals(storePage.getTitle(), "Search results: “"+searchFor+"”" );
+           // org.junit.Assert.assertEquals("Search results: “"+searchFor+"”",storePage.getTitle());
             storePage.clickAddToCartBtn(product.getName());
             CartPage cartPage = storePage.clickViewCart();
-            Assert.assertEquals(
-                    cartPage.getProductName(),product.getName()
-            );
+            Assert.assertEquals(cartPage.getProductName(),product.getName());
+            //org.junit.Assert.assertEquals(product.getName(), cartPage.getProductName());
             CheckOutPage checkOutPage = cartPage.checkOut();
             checkOutPage.clickHereToLoginLink();
             checkOutPage.
@@ -63,14 +63,14 @@ public class MyFirstTest extends BaseTest {
                     setBillingAddress(billingAddress).
                     selectDirectBankTransfer().
                     placeOrder();
-            Assert.assertEquals(
-                    checkOutPage.getNotice(),
-                    "Thank you. Your order has been received."
-            );
+            Assert.assertEquals(checkOutPage.getNotice(),"Thank you. Your order has been received.");
+            //org.junit.Assert.assertEquals("Thank you. Your order has been received.", checkOutPage.getNotice());
         }
+       // @Test
         @Test
         public void testForExperiment(){
             System.out.println("Just a dummy test case");
             Assert.assertEquals(1,1);
+            //Assert.assertEquals(1,1);
         }
 }
