@@ -22,6 +22,11 @@ public class StorePage extends BasePage {
         return this;
     }
 
+    public StorePage load(){
+        load("/store");
+        return this;
+    }
+
     private StorePage clickSearchBtn(){
         driver.findElement(searchBtn).click();
         return this;
@@ -34,6 +39,11 @@ public class StorePage extends BasePage {
 
     public String getTitle(){
         return driver.findElement(title).getText();
+    }
+
+    public StorePage urlContains(String UrlContains){
+        wait.until(ExpectedConditions.urlContains(UrlContains));
+        return this;
     }
 
     private By getAddToCardBtnElement(String productName){
