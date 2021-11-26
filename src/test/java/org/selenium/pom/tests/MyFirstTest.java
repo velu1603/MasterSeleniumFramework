@@ -16,8 +16,7 @@ import java.io.IOException;
 
 
 public class MyFirstTest extends BaseTest {
-   @Test
-    //@Test
+   //@Test
     public void guestCheckOutUsingDirectBankTransfer() throws IOException {
         String searchFor = "Blue";
         BillingAddress billingAddress = JacksonUtils.deserializeJson("myBillingAddress.json",BillingAddress.class );
@@ -40,8 +39,7 @@ public class MyFirstTest extends BaseTest {
        Assert.assertEquals(checkOutPage.getNotice(),"Thank you. Your order has been received.");
         //org.junit.Assert.assertEquals("Thank you. Your order has been received.", checkOutPage.getNotice());
     }
-       @Test
-        //@Test
+       //@Test
         public void loginAndCheckOutUsingDirectBankTransfer() throws IOException {
             String searchFor = "blue";
             BillingAddress billingAddress = JacksonUtils.deserializeJson("myBillingAddress.json",BillingAddress.class );
@@ -67,8 +65,8 @@ public class MyFirstTest extends BaseTest {
             Assert.assertEquals(checkOutPage.getNotice(),"Thank you. Your order has been received.");
             //org.junit.Assert.assertEquals("Thank you. Your order has been received.", checkOutPage.getNotice());
         }
-       // @Test
-        @Test
+
+        //@Test
         public void testForExperiment(){
             System.out.println("Just a dummy test case");
             Assert.assertEquals(1,1);
