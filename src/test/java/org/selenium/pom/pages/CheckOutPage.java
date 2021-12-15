@@ -142,7 +142,12 @@ public class CheckOutPage extends BasePage {
     public CheckOutPage login(User user){
         return enterUserName(user.getUsername()).
                 enterPassword(user.getPassword()).
-                clickLoginBtn();
+                clickLoginBtn().waitForLoginBtnToDisappear();
+    }
+
+    private CheckOutPage waitForLoginBtnToDisappear(){
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(loginBtn));
+        return this;
     }
 
     public CheckOutPage selectDirectBankTransfer(){

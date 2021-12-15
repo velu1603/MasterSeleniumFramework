@@ -28,7 +28,7 @@ public class BaseTest {
     @Parameters("browser")
     @BeforeMethod
     //@Before
-    public void startDriver(String browser){
+    public synchronized void startDriver(String browser){
         browser = System.getProperty("browser", browser);
        // String browser = "CHROME";
         //setDriver(new DriverManager().initializeDriver(browser));
@@ -40,7 +40,7 @@ public class BaseTest {
 
     @AfterMethod
     //@After
-    public void quitDriver()    {
+    public synchronized void quitDriver()    {
         System.out.println("CURRENT THREAD "+ Thread.currentThread().getId() + ", "
                 + "DRIVER = " + getDriver());
         getDriver().quit();
