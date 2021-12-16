@@ -17,19 +17,18 @@ import java.io.IOException;
 
 public class MyFirstTest extends BaseTest {
    @Test
-    //@Test
     public void guestCheckOutUsingDirectBankTransfer() throws IOException {
         String searchFor = "Blue";
         BillingAddress billingAddress = JacksonUtils.deserializeJson("myBillingAddress.json",BillingAddress.class );
         Product product = new Product(1215);
         StorePage storePage = new HomePage(getDriver()).
                             load().
-                            navigateToStoreUsingMenu().
+                            getMyHeader().navigateToStoreUsingMenu().
                             search(searchFor);
         Assert.assertEquals(storePage.getTitle(), "Search results: “"+searchFor+"”" );
         //org.junit.Assert.assertEquals("Search results: “"+searchFor+"”",storePage.getTitle());
-        storePage.clickAddToCartBtn(product.getName());
-        CartPage cartPage = storePage.clickViewCart();
+        storePage.getProductThumbnail().clickAddToCartBtn(product.getName());
+        CartPage cartPage = storePage.getProductThumbnail().clickViewCart();
         Assert.assertEquals(cartPage.getProductName(),product.getName());
         //org.junit.Assert.assertEquals(product.getName(), cartPage.getProductName());
         CheckOutPage checkOutPage = cartPage.
@@ -41,7 +40,6 @@ public class MyFirstTest extends BaseTest {
         //org.junit.Assert.assertEquals("Thank you. Your order has been received.", checkOutPage.getNotice());
     }
        @Test
-        //@Test
         public void loginAndCheckOutUsingDirectBankTransfer() throws IOException {
             String searchFor = "blue";
             BillingAddress billingAddress = JacksonUtils.deserializeJson("myBillingAddress.json",BillingAddress.class );
@@ -49,12 +47,12 @@ public class MyFirstTest extends BaseTest {
             User user = new User(ConfigLoader.getInstance().getUsername(), ConfigLoader.getInstance().getPassword());
             StorePage storePage = new HomePage(getDriver()).
                     load().
-                    navigateToStoreUsingMenu().
+                    getMyHeader().navigateToStoreUsingMenu().
                     search(searchFor);
            Assert.assertEquals(storePage.getTitle(), "Search results: “"+searchFor+"”" );
            // org.junit.Assert.assertEquals("Search results: “"+searchFor+"”",storePage.getTitle());
-            storePage.clickAddToCartBtn(product.getName());
-            CartPage cartPage = storePage.clickViewCart();
+            storePage.getProductThumbnail().clickAddToCartBtn(product.getName());
+            CartPage cartPage = storePage.getProductThumbnail().clickViewCart();
             Assert.assertEquals(cartPage.getProductName(),product.getName());
             //org.junit.Assert.assertEquals(product.getName(), cartPage.getProductName());
             CheckOutPage checkOutPage = cartPage.checkOut();
@@ -67,8 +65,8 @@ public class MyFirstTest extends BaseTest {
             Assert.assertEquals(checkOutPage.getNotice(),"Thank you. Your order has been received.");
             //org.junit.Assert.assertEquals("Thank you. Your order has been received.", checkOutPage.getNotice());
         }
-       // @Test
-        @Test
+
+        //@Test
         public void testForExperiment(){
             System.out.println("Just a dummy test case");
             Assert.assertEquals(1,1);

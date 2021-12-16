@@ -28,10 +28,16 @@ public class CheckOutPage extends BasePage {
     private final By countryDropDown = By.id("billing_country");
     private final By stateDropDown = By.id("billing_state");
     private final By directBankTransferRadioButton = By.id("payment_method_bacs");
+    private final By productName = By.cssSelector("td[class='product-name']");
 
 
     public CheckOutPage(WebDriver driver) {
         super(driver);
+    }
+
+    public CheckOutPage load(){
+        load("/checkout/");
+        return this;
     }
 
     public CheckOutPage selectCountry(String countryName){
@@ -136,7 +142,12 @@ public class CheckOutPage extends BasePage {
     public CheckOutPage login(User user){
         return enterUserName(user.getUsername()).
                 enterPassword(user.getPassword()).
-                clickLoginBtn();
+                clickLoginBtn().waitForLoginBtnToDisappear();
+    }
+
+    private CheckOutPage waitForLoginBtnToDisappear(){
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(loginBtn));
+        return this;
     }
 
     public CheckOutPage selectDirectBankTransfer(){
@@ -145,6 +156,10 @@ public class CheckOutPage extends BasePage {
             e.click();
         }
         return this;
+    }
+
+    public String getProductName(){
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(productName)).getText();
     }
 
 }
